@@ -1,0 +1,33 @@
+.home .wp-block-heading {
+  font-family: "Geist";
+  font-size: 46.08px;
+}
+
+/* remove default figure margins */
+.wp-container-core-columns-is-layout-9d6595d7 .wp-block-image {
+  margin: 0;
+}
+
+/* make the right column a flex container and center its content vertically */
+.wp-container-core-columns-is-layout-9d6595d7 > .wp-block-column:nth-child(2) {
+  display: flex;
+  align-items: center; /* vertical centering */
+  justify-content: center; /* optional: center horizontally inside the column */
+}
+
+/* ensure the image scales correctly */
+.wp-container-core-columns-is-layout-9d6595d7 .wp-block-image img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.wp-container-core-columns-is-layout-9d6595d7 > .wp-block-column:nth-child(1) {
+  display: flex;
+  align-items: center; /* vertical centering */
+}
+
+/* Optional: remove default top margins inside text column */
+.wp-container-core-columns-is-layout-9d6595d7 .wp-block-column h2 {
+  margin-top: 0;
+}

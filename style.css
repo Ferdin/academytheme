@@ -1,0 +1,82 @@
+/*
+Theme Name: Norbert Academy Theme
+Theme URI: https://norbertacademy.com/
+Author: Ferdin Norbert
+Author URI: https://norbertacademy.com/
+Description: A custom theme for Norbert Academy, built from scratch.
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: norbert-academy
+Tags: custom, responsive, minimal
+*/
+
+body {
+  margin: 0px;
+  background-color: white;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between; /* logo left, nav right */
+  align-items: center; /* vertically center items */
+  padding: 1rem 4rem;
+  background-color: #3f00ff; /*#000f89 - Phthalo*/
+}
+
+/* Logo */
+.custom-logo {
+  max-height: 100px; /* limits height */
+  height: auto; /* preserves aspect ratio */
+  width: auto;
+}
+
+/* Navigation menu */
+.main-nav .nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav .nav-menu li a {
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  font-family: "Geist";
+  font-weight: 500;
+}
+
+.main-nav .nav-menu li a:hover {
+  color: yellow;
+}
+
+.site-main,
+.site-footer {
+  padding: 1rem 4rem;
+}
+
+h1,
+a,
+nav,
+p {
+  font-family: "Geist";
+}
+
+.icon-heading-block {
+  display: flex;
+  align-items: center; /* vertically align icon & heading */
+  gap: 10px; /* space between icon and heading */
+  margin-bottom: 20px;
+}
+
+.icon-heading-block .icon {
+  font-size: 2em; /* adjust icon size */
+}
+
+.icon-heading-block .heading {
+  margin: 0;
+  font-size: 1.5em; /* adjust heading size */
+  font-family: "Geist";
+}

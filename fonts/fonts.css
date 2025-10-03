@@ -1,0 +1,59 @@
+/* Black */
+@font-face {
+  font-family: "Geist";
+  src: url("Geist-Black.woff2") format("woff2"),
+    url("Geist-Black.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap; /* optional, improves performance */
+}
+
+/* Bold */
+@font-face {
+  font-family: "Geist";
+  src: url("Geist-Bold.woff2") format("woff2"),
+    url("Geist-Bold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap; /* optional, improves performance */
+}
+
+/* Medium */
+@font-face {
+  font-family: "Geist";
+  src: url("Geist-Medium.woff2") format("woff2"),
+    url("Geist-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap; /* optional, improves performance */
+}
+
+/* Regular */
+@font-face {
+  font-family: "Geist";
+  src: url("Geist-Regular.woff2") format("woff2"),
+    url("Geist-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; /* optional, improves performance */
+}
+
+/* Thin */
+@font-face {
+  font-family: "Geist";
+  src: url("Geist-Thin.woff2") format("woff2"),
+    url("Geist-Thin.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap; /* optional, improves performance */
+}
+
+/* Light */
+@font-face {
+  font-family: "Geist";
+  src: url("Geist-Light.woff2") format("woff2"),
+    url("Geist-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap; /* optional, improves performance */
+}
