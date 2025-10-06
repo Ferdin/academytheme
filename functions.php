@@ -106,5 +106,6 @@
         wp_reset_postdata();
         return ob_get_clean(); // Return captured output
     }
-
+    
+add_theme_support('post-thumbnails');
 add_shortcode('post_grid', 'norbert_academy_post_grid_shortcode');
