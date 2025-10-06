@@ -59,8 +59,8 @@
     function norbert_academy_post_grid_shortcode($atts) {
         $atts = shortcode_atts(
             [
-                'posts_per_page' => 6,
-                'columns'        => 3,
+                'posts_per_page' => 8,
+                'columns'        => 4,
                 'category'       => '',
             ],
             $atts,
