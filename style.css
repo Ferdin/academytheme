@@ -52,7 +52,14 @@ body {
   color: yellow;
 }
 
-.site-main,
+:where(.wp-block-columns) {
+  margin-bottom: 0px !important;
+}
+
+.wp-block-columns {
+  padding: 2rem 4rem;
+}
+
 .site-footer {
   padding: 1rem 4rem;
 }
@@ -68,7 +75,6 @@ p {
   display: flex;
   align-items: center; /* vertically align icon & heading */
   gap: 10px; /* space between icon and heading */
-  margin-bottom: 20px;
 }
 
 .icon-heading-block .icon {

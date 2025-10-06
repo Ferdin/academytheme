@@ -22,7 +22,8 @@
   height: auto;
 }
 
-.wp-container-core-columns-is-layout-9d6595d7 > .wp-block-column:nth-child(1) {
+.wp-container-core-columns-is-layout-9d6595d7:nth-child(1)
+  > .wp-block-column:nth-child(1) {
   display: flex;
   align-items: center; /* vertical centering */
 }
@@ -30,4 +31,67 @@
 /* Optional: remove default top margins inside text column */
 .wp-container-core-columns-is-layout-9d6595d7 .wp-block-column h2 {
   margin-top: 0;
+}
+
+.na-post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.na-post-card {
+  background: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.na-post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.na-post-thumb img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.na-post-content {
+  padding: 15px;
+}
+
+.na-post-title {
+  font-size: 1.2em;
+  margin: 0 0 10px;
+}
+
+.na-post-title a {
+  text-decoration: none;
+  color: #333;
+}
+
+.na-post-title a:hover {
+  color: #0073aa;
+}
+
+.na-post-excerpt {
+  color: #555;
+  font-size: 0.95em;
+  line-height: 1.5;
+}
+
+/* Responsive: switch to 2 or 1 columns on smaller screens */
+@media (max-width: 900px) {
+  .na-post-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .na-post-grid {
+    grid-template-columns: 1fr;
+  }
 }
