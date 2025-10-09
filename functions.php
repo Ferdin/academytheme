@@ -59,8 +59,8 @@
     function norbert_academy_post_grid_shortcode($atts) {
         $atts = shortcode_atts(
             [
-                'posts_per_page' => 8,
-                'columns'        => 4,
+                'posts_per_page' => 6,
+                'columns'        => 3,
                 'category'       => '',
             ],
             $atts,
@@ -109,3 +109,72 @@
     
 add_theme_support('post-thumbnails');
 add_shortcode('post_grid', 'norbert_academy_post_grid_shortcode');
+
+function norbert_academy_customize_register( $wp_customize ) {
+    // === Header Colors Section ===
+    $wp_customize->add_section( 'header_colors_section', [
+        'title'       => __( 'Header Colors', 'norbert-academy' ),
+        'priority'    => 30,
+        'description' => 'Customize the header colors',
+    ] );
+
+    // === Background Color ===
+    $wp_customize->add_setting( 'header_background_color', [
+        'default'           => '#ffffff',
+        'transport'         => 'refresh',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ] );
+
+    $wp_customize->add_control(
+        new WP_Customize_Color_Control(
+            $wp_customize,
+            'header_background_color_control',
+            [
+                'label'    => __( 'Header Background Color', 'norbert-academy' ),
+                'section'  => 'header_colors_section',
+                'settings' => 'header_background_color',
+            ]
+        )
+    );
+
+    // === Navigation Font Color ===
+    $wp_customize->add_setting( 'header_nav_font_color', [
+        'default'           => '#000000',
+        'transport'         => 'refresh',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ] );
+
+    $wp_customize->add_control(
+        new WP_Customize_Color_Control(
+            $wp_customize,
+            'header_nav_font_color_control',
+            [
+                'label'    => __( 'Navigation Font Color', 'norbert-academy' ),
+                'section'  => 'header_colors_section',
+                'settings' => 'header_nav_font_color',
+            ]
+        )
+    );
+}
+add_action( 'customize_register', 'norbert_academy_customize_register' );
+
+
+function norbert_academy_customize_css() {
+    $header_bg = get_theme_mod('header_background_color', '#fffffff');
+    $nav_color = get_theme_mod('header_nav_font_color', '#000000')
+    ?>
+        <style type="text/css">
+            .site-header {
+                background-color: <?php echo esc_html( $header_bg);?>;
+            }
+            .site-header .main-nav .nav-menu a {
+                color: <?php echo esc_html($nav_color);?>
+            }
+            .site-header .main-nav .nav-menu a:hover {
+                opacity: 0.8;
+            }
+        </style>
+    <?php
+}
+
+add_action('wp_head', 'norbert_academy_customize_css');

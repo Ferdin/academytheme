@@ -21,7 +21,11 @@ body {
   justify-content: space-between; /* logo left, nav right */
   align-items: center; /* vertically center items */
   padding: 1rem 4rem;
-  background-color: #3f00ff; /*#000f89 - Phthalo*/
+  /* background-color: #3f00ff;  #000f89 - Phthalo*/
+}
+
+.site-header {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* Logo */
@@ -46,10 +50,6 @@ body {
   text-decoration: none;
   font-family: "Geist";
   font-weight: 500;
-}
-
-.main-nav .nav-menu li a:hover {
-  color: yellow;
 }
 
 :where(.wp-block-columns) {
@@ -85,4 +85,17 @@ p {
   margin: 0;
   font-size: 1.5em; /* adjust heading size */
   font-family: "Geist";
+}
+
+@media (min-width: 1390px) {
+  .header-container {
+    padding: 1rem 18rem;
+  }
+  .wp-block-columns {
+    padding: 2rem 18rem;
+  }
+
+  .site-footer {
+    padding: 1rem 18rem;
+  }
 }
