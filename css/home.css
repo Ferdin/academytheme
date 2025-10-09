@@ -33,11 +33,41 @@
   margin-top: 0;
 }
 
-.na-post-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.na-article-container {
+  display: flex;
   gap: 20px;
   margin-top: 30px;
+}
+
+.na-article-container button {
+  cursor: pointer;
+  margin-top: 15px;
+  background: black;
+  font-family: "Geist";
+  font-size: 18px;
+  border: none;
+  color: white;
+  padding: 1em;
+}
+
+.na-article-container .na-article-container-child-1 {
+  flex: 0 0 40%;
+}
+
+.na-article-container .na-article-container-child-1 h2 {
+  font-family: "Geist";
+  font-size: 28.8px;
+  font-weight: 700;
+}
+
+.na-article-container .na-article-container-child-2 {
+  flex: 0 0 60%;
+}
+
+.na-post-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
 .na-post-card {
