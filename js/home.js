@@ -21,31 +21,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     )
     .join("");
 
-  let scrollCount = 0;
-  let isScrolling = false;
-  let scrollEndTimer;
-
-  window.addEventListener("wheel", (event) => {
-    const direction =
-      event.deltaY > 0 ? "down" : event.deltaY < 0 ? "up" : null;
-    if (!direction) return;
-
-    if (!isScrolling) {
-      isScrolling = true;
-      if (direction === "down") {
-        scrollCount++;
-      } else {
-        scrollCount--;
-      }
-      console.log(`Scroll ${direction}: ${scrollCount}`);
-    }
-
-    clearTimeout(scrollEndTimer);
-    scrollEndTimer = setTimeout(() => {
-      isScrolling = false;
-    }, 200);
-  });
-
   window.addEventListener(
     "load",
     function (event) {
