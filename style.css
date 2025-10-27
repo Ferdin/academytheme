@@ -72,6 +72,7 @@ p {
 }
 
 .icon-heading-block {
+  margin-top: 25px;
   display: flex;
   align-items: center; /* vertically align icon & heading */
   gap: 10px; /* space between icon and heading */

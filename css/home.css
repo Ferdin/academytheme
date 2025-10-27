@@ -11,8 +11,8 @@
 /* make the right column a flex container and center its content vertically */
 .wp-container-core-columns-is-layout-9d6595d7 > .wp-block-column:nth-child(2) {
   display: flex;
-  align-items: center; /* vertical centering */
-  justify-content: center; /* optional: center horizontally inside the column */
+  align-items: center;
+  justify-content: center;
 }
 
 /* ensure the image scales correctly */
@@ -24,7 +24,7 @@
 
 .norbert-academy-home-hero:nth-child(1) > .wp-block-column:nth-child(1) {
   display: flex;
-  align-items: center; /* vertical centering */
+  align-items: center;
 }
 
 /* Optional: remove default top margins inside text column */
@@ -36,6 +36,7 @@
   display: flex;
   gap: 20px;
   padding-top: 9vh;
+  width: 100%;
 }
 
 .na-article-container button {
@@ -50,11 +51,14 @@
 }
 
 .na-article-container .na-article-container-child-1 {
-  flex: 0 0 50%;
+  flex: 1;
+  min-width: 0; /* Prevents flex item from overflowing */
 }
 
 .na-article-container .na-article-container-child-2 {
-  flex: 0 0 50%;
+  flex: 1;
+  min-width: 0; /* Prevents flex item from overflowing */
+  overflow: hidden; /* Prevents grid overflow */
 }
 
 .na-article-container .na-article-container-child-1 h2 {
@@ -67,6 +71,22 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.na-post-card {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+}
+
+.na-post-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
 }
 
 .na-post-thumb img {
@@ -101,10 +121,24 @@
 
 .na-post-blank-img {
   background: white;
+  width: 100%;
+  padding-bottom: 66.67%; /* 3:2 aspect ratio */
 }
 
 .home-article-section {
   height: 100vh;
+}
+
+.na-post-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: rgb(45, 45, 236);
+  opacity: 0;
+  z-index: 9999;
 }
 
 /* Responsive: switch to 2 or 1 columns on smaller screens */
@@ -117,5 +151,9 @@
 @media (max-width: 600px) {
   .na-post-grid {
     grid-template-columns: 1fr;
+  }
+
+  .na-article-container {
+    flex-direction: column;
   }
 }
