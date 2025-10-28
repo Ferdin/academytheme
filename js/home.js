@@ -27,13 +27,36 @@ document.addEventListener("DOMContentLoaded", function (event) {
       const cards = gsap.utils.toArray(".na-post-card img");
       const cardsOverlay = gsap.utils.toArray(".na-post-card-overlay");
       // Helper function to update text content
+      let currentIndex = -1; // Track current index
+
       function updateText(index) {
-        if (index >= 0 && index < posts.length) {
-          textContainer.innerHTML = `
-            <h2>${posts[index].title}</h2>
-            <p>${posts[index].excerpt}</p>
-            <a href="${posts[index].link}" class="read-more-btn">Read More</a>
-          `;
+        if (index >= 0 && index < posts.length && index !== currentIndex) {
+          currentIndex = index;
+
+          gsap.to(textContainer, {
+            opacity: 0,
+            y: 10,
+            duration: 0.2,
+            ease: "power2.in",
+            onComplete: () => {
+              textContainer.innerHTML = `
+          <h2>${posts[index].title}</h2>
+          <p>${posts[index].excerpt}</p>
+          <a href="${posts[index].link}" class="read-more-btn">Read More</a>
+        `;
+
+              gsap.fromTo(
+                textContainer,
+                { opacity: 0, y: -10 },
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.3,
+                  ease: "power2.out",
+                }
+              );
+            },
+          });
         }
       }
 

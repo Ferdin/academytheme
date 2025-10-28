@@ -6,9 +6,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
     function (e) {
       //custom GSAP code goes here
       gsap.from(".custom-logo", {
-        y: -100,
-        duration: 2,
-        ease: "bounce.out",
+        opacity: 0,
+        duration: 3,
+        ease: "circ.out",
       });
     },
     false

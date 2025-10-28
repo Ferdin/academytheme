@@ -1,6 +1,5 @@
 .home .wp-block-heading {
   font-family: "Geist";
-  font-size: 28.8px;
 }
 
 /* remove default figure margins */
@@ -63,7 +62,7 @@
 
 .na-article-container .na-article-container-child-1 h2 {
   font-family: "Geist";
-  font-size: 28.8px;
+  font-size: 45px;
   font-weight: 700;
 }
 
@@ -136,9 +135,25 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  background: rgb(45, 45, 236);
   opacity: 0;
   z-index: 9999;
+}
+
+.typewriter-container {
+  font-family: monospace;
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+.typewriter-text {
+  color: #d4d4d4;
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.typewriter-cursor {
+  color: #d4d4d4;
 }
 
 /* Responsive: switch to 2 or 1 columns on smaller screens */
