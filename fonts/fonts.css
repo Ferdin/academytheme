@@ -57,3 +57,57 @@
   font-style: normal;
   font-display: swap; /* optional, improves performance */
 }
+
+/* Black */
+@font-face {
+  font-family: "GeistMono";
+  src: url("GeistMono-Black.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap; /* optional, improves performance */
+}
+
+/* Bold */
+@font-face {
+  font-family: "GeistMono";
+  src: url("GeistMono-Bold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap; /* optional, improves performance */
+}
+
+/* Medium */
+@font-face {
+  font-family: "GeistMono";
+  src: url("GeistMono-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap; /* optional, improves performance */
+}
+
+/* Regular */
+@font-face {
+  font-family: "GeistMono";
+  src: url("GeistMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; /* optional, improves performance */
+}
+
+/* Thin */
+@font-face {
+  font-family: "GeistMono";
+  src: url("GeistMono-Thin.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap; /* optional, improves performance */
+}
+
+/* Light */
+@font-face {
+  font-family: "GeistMono";
+  src: url("GeistMono-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap; /* optional, improves performance */
+}

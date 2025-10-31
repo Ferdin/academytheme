@@ -1,35 +1,92 @@
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener("DOMContentLoaded", function () {
   if (typeof NorbertAcademyTypeWriting === "undefined") return;
-  const text = NorbertAcademyTypeWriting.instances[0].text;
-  const speed = NorbertAcademyTypeWriting.instances[0].speed;
-  const delay = NorbertAcademyTypeWriting.instances[0].delay;
 
-  if (text.length === 0) return;
+  const rawEl = document.querySelector(".typewriter-raw");
+  const displayEl = document.querySelector(".typewriter-display");
 
-  //   const cursor = document.querySelector(".typewriter-cursor");
-  //   // Create text container
-  //   const textSpan = document.createElement("span");
-  //   if (cursor) {
-  //     element.insertBefore(textSpan, cursor);
-  //   } else {
-  //     element.appendChild(textSpan);
-  //   }
-  // GSAP typing animation
-  gsap.to(textSpan, {
-    duration: text.length * speed,
-    text: text,
-    ease: "none",
-    delay: delay,
-  });
-
-  // Cursor blink animation
-  if (cursor) {
-    gsap.to(cursor, {
-      opacity: 0,
-      duration: 0.5,
-      repeat: -1,
-      yoyo: true,
-      ease: "steps(1)",
-    });
+  function wrapIncludeWithSpan(text) {
+    return text
+      .replace(
+        /(#include)(\s+&lt;[^&]+&gt;)/g,
+        '<span class="include-directive">$1</span>$2'
+      )
+      .replace(
+        /\b(using)\b/g, // match "using" as a whole word
+        '<span class="include-directive">$1</span>'
+      )
+      .replace(
+        /(&lt;iostream+&gt;)/g,
+        '<span class="ios-stream-directive">$1</span>'
+      )
+      .replace(
+        /\b(namespace)\b/g, // match "using" as a whole word
+        '<span class="blue-directive">$1</span>'
+      )
+      .replace(
+        /\b(int)\b/g, // match "using" as a whole word
+        '<span class="blue-directive">$1</span>'
+      )
+      .replace(
+        /\b(std)\b/g, // match "using" as a whole word
+        '<span class="s-directive">$1</span>'
+      )
+      .replace(
+        /\b[a-zA-Z_]\w*\s*\([^)]*\)\s*/g,
+        '<span class="yellow-directive">$&</span>'
+      )
+      .replace(/(\/\/[^\n<]*)/g, '<span class="comment-directive">$1</span>');
   }
+
+  function getElementStyled(element) {
+    let html = element.innerHTML;
+
+    // Wrap #include directives
+    html = html
+      .replace(
+        /(#include)(\s+&lt;[^&]+&gt;)/g,
+        '<span class="include-directive">$1</span>$2'
+      )
+      .replace(/\b(using)\b/g, '<span class="include-directive">$1</span>')
+      .replace(
+        /(&lt;iostream+&gt;)/g,
+        '<span class="ios-stream-directive">$1</span>'
+      )
+      .replace(/\b(namespace)\b/g, '<span class="blue-directive">$1</span>')
+      .replace(/\b(int)\b/g, '<span class="blue-directive">$1</span>')
+      .replace(/\b(std)\b/g, '<span class="s-directive">$1</span>')
+      .replace(
+        /\b[a-zA-Z_]\w*\s*\([^)]*\)\s*/g,
+        '<span class="yellow-directive">$&</span>'
+      )
+      .replace(/(\/\/[^\n<]*)/g, '<span class="comment-directive">$1</span>');
+
+    element.innerHTML = html;
+  }
+
+  // Loop through each instance
+  NorbertAcademyTypeWriting.instances.forEach((instance) => {
+    const { text, speed, delay, cursor } = instance;
+
+    if (!rawEl || !text) return;
+
+    const formattedText = text.replace(/\n/g, "<br>");
+
+    // Animate the text
+    gsap.to(rawEl, {
+      duration: text.length * speed, // duration scales with text length
+      text: formattedText,
+      ease: "none",
+      delay: delay,
+      onUpdate: () => {
+        // Get whatever has been typed so far
+        const partial = rawEl.innerHTML;
+
+        // Highlight and display it
+        displayEl.innerHTML = wrapIncludeWithSpan(partial);
+      },
+      onComplete: () => {
+        getElementStyled(displayEl);
+      },
+    });
+  });
 });

@@ -14,6 +14,7 @@ Tags: custom, responsive, minimal
 body {
   margin: 0px;
   background-color: white;
+  overflow-x: hidden;
 }
 
 .header-container {

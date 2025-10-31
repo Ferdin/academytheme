@@ -26,6 +26,10 @@
   align-items: center;
 }
 
+.norbert-academy-home-hero {
+  height: 80vh;
+}
+
 /* Optional: remove default top margins inside text column */
 .wp-container-core-columns-is-layout-9d6595d7 .wp-block-column h2 {
   margin-top: 0;
@@ -140,22 +144,82 @@
 }
 
 .typewriter-container {
+  position: relative;
+  width: 100%;
+  height: 50vh;
   font-family: monospace;
   background: #1e1e1e;
   padding: 20px;
   border-radius: 5px;
   margin: 20px 0;
+  box-shadow: rgba(99, 99, 99, 0.7) 0px 2px 8px 0px;
 }
-.typewriter-text {
-  color: #d4d4d4;
-  margin: 0;
+.typewriter-display,
+.typewriter-raw {
+  font-family: "GeistMono";
+  font-weight: 400;
+  font-size: 1rem;
+  color: #e2e8f0;
   white-space: pre-wrap;
-  word-wrap: break-word;
+  line-height: 1.5;
 }
+
+.typewriter-bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: #888;
+  padding-bottom: 2rem;
+}
+
 .typewriter-cursor {
   color: #d4d4d4;
 }
 
+.typewriter-icon-container {
+  position: relative;
+}
+
+.btn-norbert-academy-right {
+  position: absolute;
+  right: 0;
+  color: white;
+}
+
+.include-directive {
+  color: #ff0054;
+  font-weight: 600;
+  white-space: pre-wrap;
+}
+
+.ios-stream-directive {
+  color: #ff5400;
+  font-weight: 600;
+  white-space: pre-wrap;
+}
+
+.blue-directive {
+  color: #6e2be1;
+  font-weight: 600;
+  white-space: pre-wrap;
+}
+
+.s-directive {
+  color: #9e0059;
+  font-weight: 600;
+  white-space: pre-wrap;
+}
+
+.yellow-directive {
+  color: #ffbd00;
+  font-weight: 600;
+  white-space: pre-wrap;
+}
+
+.comment-directive {
+  color: green;
+  white-space: pre-wrap;
+}
 /* Responsive: switch to 2 or 1 columns on smaller screens */
 @media (max-width: 900px) {
   .na-post-grid {

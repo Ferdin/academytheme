@@ -211,7 +211,7 @@
     add_shortcode('post_grid', 'norbert_academy_post_grid_shortcode');
 
     function norbert_academy_typewriting_animation($atts, $content = null){
-        
+         static $typewriter_instances = [];
         if (empty($content)) {
             return '';
         }
@@ -234,8 +234,7 @@
         
         // Store this instance configuration
         $typewriter_instances[] = [
-            'id'      => $unique_id,
-            'text'    => $content,
+            'text'    => htmlspecialchars($content),
             'speed'   => $speed,
             'delay'   => $delay,
             'cursor'  => $show_cursor
@@ -247,14 +246,26 @@
 
         // Build the output HTML
         $output = '<div class="typewriter-container">';
-        $output .= '<pre id="' . esc_attr($unique_id) . '" class="typewriter-text">';
-        if ($show_cursor) {
-            $output .= '<span class="typewriter-cursor">|</span>';
-        }
-        $output .= '</pre>';
+        $output .= '<div class="typewriter-icon-container"><i class="bi bi-arrow-right-circle-fill btn-norbert-academy-right"></i></div>';
+        $output .= '<code class="typewriter-raw" style="display:none;"></code>';
+        $output .= '<code class="typewriter-display"></code>';
+        $output .= '<div class="typewriter-bottom">We teach: <span>C++</span>, <span>PHP</span>, <span>Javascript</span>, and <span>More</div>';
         $output .= '</div>';
         
         return $output;
     }
     add_shortcode('typewriting_animation', 'norbert_academy_typewriting_animation');
 
+    // Prevent wpautop from running on this shortcode's content
+    add_filter('the_content', function($content) {
+        // Protect shortcode content from wpautop
+        $pattern = '/\[typewriting_animation([^\]]*)\](.*?)\[\/typewriting_animation\]/s';
+        $content = preg_replace_callback($pattern, function($matches) {
+            // Remove any <br /> tags and preserve original formatting
+            $inner = preg_replace('/<br\s*\/?>/', '', $matches[2]);
+            $inner = preg_replace('/<p\s*\/?>/', '', $inner);
+            $inner = preg_replace('/<\/p\s*\/?>/', '', $inner);
+            return '[typewriting_animation' . $matches[1] . ']' . $inner . '[/typewriting_animation]';
+        }, $content);
+        return $content;
+    }, 9); // Priority 9 runs before wpautop (priority 10)
