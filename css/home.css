@@ -42,7 +42,9 @@
   width: 100%;
 }
 
-.na-article-container button {
+.na-article-container .read-more-btn {
+  position: absolute;
+  text-decoration: none;
   cursor: pointer;
   margin-top: 15px;
   background: black;
@@ -65,9 +67,17 @@
 }
 
 .na-article-container .na-article-container-child-1 h2 {
+  padding-bottom: 18px;
+  border-bottom: 1px solid;
+  color: #ffffff;
   font-family: "Geist";
   font-size: 45px;
   font-weight: 700;
+}
+
+.na-article-container .na-article-container-child-1 p {
+  color: white;
+  font-weight: 500;
 }
 
 .na-post-grid {
@@ -146,7 +156,7 @@
 .typewriter-container {
   position: relative;
   width: 100%;
-  height: 50vh;
+  height: 40vh;
   font-family: monospace;
   background: #1e1e1e;
   padding: 20px;
@@ -154,8 +164,17 @@
   margin: 20px 0;
   box-shadow: rgba(99, 99, 99, 0.7) 0px 2px 8px 0px;
 }
+
+@media (min-height: 757px) {
+  .typewriter-container {
+    height: 30vh;
+  }
+}
+
 .typewriter-display,
 .typewriter-raw {
+  position: absolute;
+  top: 48px;
   font-family: "GeistMono";
   font-weight: 400;
   font-size: 1rem;
@@ -184,6 +203,10 @@
   position: absolute;
   right: 0;
   color: white;
+}
+
+.btn-norbert-academy-right:hover {
+  cursor: pointer;
 }
 
 .include-directive {
@@ -220,6 +243,40 @@
   color: green;
   white-space: pre-wrap;
 }
+
+.na-course-list-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2rem;
+  margin-top: 3rem;
+}
+
+.na-course-list-container a {
+  text-decoration: none;
+}
+
+.na-course-list-container h2 {
+  text-align: center;
+  text-transform: uppercase;
+  color: black;
+  margin-top: 1rem !important;
+}
+
+.na-home-course-item {
+  border: 1px solid black;
+  border-radius: 1rem;
+}
+
+.na-home-course-item:hover {
+  box-shadow: rgba(240, 46, 170, 0.4) -5px 5px,
+    rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px,
+    rgba(240, 46, 170, 0.1) -20px 20px, rgba(240, 46, 170, 0.05) -25px 25px;
+}
+
+.na-home-course-item img {
+  border-radius: 1rem;
+}
+
 /* Responsive: switch to 2 or 1 columns on smaller screens */
 @media (max-width: 900px) {
   .na-post-grid {

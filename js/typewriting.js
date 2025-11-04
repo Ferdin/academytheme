@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   if (typeof NorbertAcademyTypeWriting === "undefined") return;
 
+  const colorSet = ["#ff0054", "#ff5400", "#6e2be1", "#9e0059", "#ffbd00"];
   const rawEl = document.querySelector(".typewriter-raw");
   const displayEl = document.querySelector(".typewriter-display");
 
@@ -62,7 +63,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     element.innerHTML = html;
   }
-
+  const cursorEl = document.createElement("span");
+  cursorEl.classList.add("typewriter-cursor");
+  cursorEl.textContent = "|";
+  displayEl.appendChild(cursorEl);
+  // Animate the text
+  gsap.to(cursorEl, {
+    opacity: 0,
+    yoyo: true,
+    ease: "power1.inOut",
+    duration: 1,
+  });
   // Loop through each instance
   NorbertAcademyTypeWriting.instances.forEach((instance) => {
     const { text, speed, delay, cursor } = instance;
@@ -71,7 +82,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const formattedText = text.replace(/\n/g, "<br>");
 
-    // Animate the text
     gsap.to(rawEl, {
       duration: text.length * speed, // duration scales with text length
       text: formattedText,
@@ -82,11 +92,41 @@ document.addEventListener("DOMContentLoaded", function () {
         const partial = rawEl.innerHTML;
 
         // Highlight and display it
-        displayEl.innerHTML = wrapIncludeWithSpan(partial);
+        displayEl.innerHTML =
+          wrapIncludeWithSpan(partial) +
+          '<span class="typewriter-cursor">|</span>';
       },
       onComplete: () => {
         getElementStyled(displayEl);
+        gsap.to(".typewriter-cursor", {
+          opacity: 0,
+          repeat: -1,
+          yoyo: true,
+        });
       },
     });
+  });
+
+  const btnLink = document.querySelector(".btn-norbert-academy-right");
+  let tl;
+
+  btnLink.addEventListener("mouseenter", function () {
+    if (tl) tl.kill();
+    tl = gsap.timeline({ repeat: -1, yoyo: true });
+
+    colorSet.forEach((c) => {
+      tl.to(btnLink, { color: c, duration: 1, ease: "none" });
+    });
+  });
+
+  btnLink.addEventListener("mouseleave", function () {
+    if (tl) {
+      tl.kill();
+      gsap.set(btnLink, { clearProps: "color" });
+    }
+  });
+
+  btnLink.addEventListener("click", function () {
+    console.log("Button clicked");
   });
 });

@@ -137,10 +137,11 @@
         wp_enqueue_script( 'gsap-st', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js', ['gsap-js'], false, true );
         // ScrollToPlugin - with gsap.js passed as a dependency
         wp_enqueue_script( 'gsap-sto', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js', ['gsap-js'], false, true );
+        wp_enqueue_script( 'gsap-sms', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js', ['gsap-js'], false, true );
         // Textplugin - with gsap.js passed as a dependency
         wp_enqueue_script( 'gsap-tp', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/TextPlugin.min.js', ['gsap-js'], false, true );
         // Your animation code file - with gsap.js passed as a dependency for site wide usage
-        wp_enqueue_script( 'gsap-js2', get_template_directory_uri() . '/js/app.js', ['gsap-js'], false, true );
+        wp_enqueue_script( 'gsap-js2', get_template_directory_uri() . '/js/app.js', ['gsap-js', 'gsap-sms', 'gsap-st'], false, true );
         // Your animation code file - with gsap.js passed as a dependency for typewriting.
         wp_enqueue_script( 'gsap-js4', get_template_directory_uri() . '/js/typewriting.js', ['gsap-js', 'gsap-tp'], false, true );
         // Your animation code file - with gsap.js passed as a dependency for home page exclusive.
@@ -149,12 +150,60 @@
 
     add_action( 'wp_enqueue_scripts', 'theme_gsap_script' );
 
+    // Site to refer: https://mygom.tech/
+    function norbert_academy_post_grid_courses_shortcode($atts) {
+        $atts = shortcode_atts(
+            [
+                'posts_per_page'    =>  6,
+                'columns'           =>  2,
+                'category'          =>  'Courses'
+            ],
+            $atts,
+            'post_grid_courses'
+            );
+        
+            //Query posts
+            $args = [
+                'post_type'         =>      'post',
+                'posts_per_page'    =>      (int) $atts['posts_per_page'],
+                'category_name'     =>      sanitize_text_field($atts['category']),
+                'post_status'       =>      'publish'
+            ];
+            ob_start();
+            ?>
+                <div class="na-course-list-container">
+            <?php
+            $query = new WP_Query($args);
+            if (!$query->have_posts()) {
+                return '<p>No posts found.</p>';
+            }
+            while ($query->have_posts()) : 
+                $query->the_post(); 
+                ?>
+                    <div class="na-home-course-item">
+                        <a href="<?php the_permalink(); ?>">
+                            <img src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
+                            <h2><?php the_title();?></h2>
+                        </a>
+                    </div>
+                <?php
+            endwhile;
+            wp_reset_postdata();
+            ?>
+                </div>
+            <?php
+            return ob_get_clean(); // Return captured output
+    }
+
+    add_shortcode('post_grid_courses', 'norbert_academy_post_grid_courses_shortcode');
+
     function norbert_academy_post_grid_shortcode($atts) {
         $atts = shortcode_atts(
             [
-                'posts_per_page' => 6,
-                'columns'        => 2,
-                'category'       => '',
+                'posts_per_page'    => 6,
+                'columns'           => 2,
+                'category'          => 'Main News',
+                'heading_color'     => '#ffffff'
             ],
             $atts,
             'post_grid'
@@ -167,7 +216,18 @@
                 'category_name'  => sanitize_text_field($atts['category']),
                 'post_status'    => 'publish',
                 ];
-
+        
+        $color = sanitize_text_field( $atts['heading_color'] );
+    
+        // Allow only valid 3- or 6-digit hex colors (with or without '#')
+        if ( ! preg_match( '/^#?([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6})$/', $color ) ) {
+            $color = '#ffffff'; // fallback
+        } else {
+            // Ensure it starts with a '#'
+            if ( strpos( $color, '#' ) !== 0 ) {
+                $color = '#' . $color;
+            }
+        }
         $query = new WP_Query($args);
         $post_data = [];                    
         if (!$query->have_posts()) {
@@ -176,10 +236,11 @@
         while ($query->have_posts()) : 
             $query->the_post(); 
             $post_data[] = [
-                'title'     => get_the_title(),
-                'excerpt'   => get_the_excerpt(),
-                'link'      => get_permalink(),
-                'thumb'     => get_the_post_thumbnail_url(get_the_ID(), 'medium'),
+                'title'         => get_the_title(),
+                'excerpt'       => get_the_excerpt(),
+                'link'          => get_permalink(),
+                'thumb'         => get_the_post_thumbnail_url(get_the_ID(), 'medium'),
+                'heading_color' => esc_attr( $color )
             ];
         endwhile;
         wp_reset_postdata();
@@ -193,9 +254,9 @@
         ?>
         <div class="na-article-container">
             <div class="na-article-container-child-1">
-                <h2 class="has-large-font-size">Post Title</h2>
+                <h2 class="has-large-font-size" style="color:<?php echo esc_attr( $color ); ?>!important;">Post Title</h2>
                 <p>Exercpts</p>
-                <button>Read More</button>
+                <a>Read More</a>
             </div>
             <div class="na-article-container-child-2">
                 <div class="na-post-grid columns-<?php echo esc_attr($atts['columns']); ?>" id="na-post-grid-section">     
@@ -249,7 +310,7 @@
         $output .= '<div class="typewriter-icon-container"><i class="bi bi-arrow-right-circle-fill btn-norbert-academy-right"></i></div>';
         $output .= '<code class="typewriter-raw" style="display:none;"></code>';
         $output .= '<code class="typewriter-display"></code>';
-        $output .= '<div class="typewriter-bottom">We teach: <span>C++</span>, <span>PHP</span>, <span>Javascript</span>, and <span>More</div>';
+        $output .= '<div class="typewriter-bottom">We teach: <span class="na-cplus-plus">C++</span>, <span class="na-php">PHP</span>, <span class="na-javascript">Javascript</span>, and <span class="na-more">More</div>';
         $output .= '</div>';
         
         return $output;

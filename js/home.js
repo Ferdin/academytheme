@@ -40,11 +40,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
             ease: "power2.in",
             onComplete: () => {
               textContainer.innerHTML = `
-          <h2>${posts[index].title}</h2>
+          <h2 style="color:${posts[index].heading_color}">${posts[index].title}</h2>
           <p>${posts[index].excerpt}</p>
           <a href="${posts[index].link}" class="read-more-btn">Read More</a>
         `;
-
               gsap.fromTo(
                 textContainer,
                 { opacity: 0, y: -10 },
@@ -83,6 +82,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
         },
       });
 
+      const colorList = gsap.utils.wrap([
+        "#ff0054",
+        "#ff5400",
+        "#6e2be1",
+        "#9e0059",
+        "#ffbd00",
+      ]);
+
       cardsOverlay.forEach((overlay, i) => {
         tl.to(
           overlay,
@@ -94,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         tl.to(
           overlay,
           {
+            backgroundColor: colorList(i),
             opacity: 0.8,
           },
           i + 0.5
