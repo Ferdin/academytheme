@@ -138,14 +138,17 @@
         // ScrollToPlugin - with gsap.js passed as a dependency
         wp_enqueue_script( 'gsap-sto', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js', ['gsap-js'], false, true );
         wp_enqueue_script( 'gsap-sms', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js', ['gsap-js'], false, true );
+        wp_enqueue_script( 'gsap-spt', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js', ['gsap-js'], false, true );
         // Textplugin - with gsap.js passed as a dependency
         wp_enqueue_script( 'gsap-tp', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/TextPlugin.min.js', ['gsap-js'], false, true );
         // Your animation code file - with gsap.js passed as a dependency for site wide usage
-        wp_enqueue_script( 'gsap-js2', get_template_directory_uri() . '/js/app.js', ['gsap-js', 'gsap-sms', 'gsap-st'], false, true );
+        wp_enqueue_script( 'gsap-js2', get_template_directory_uri() . '/js/app.js', ['gsap-js', 'gsap-sms', 'gsap-st', 'gsap-spt'], false, true );
         // Your animation code file - with gsap.js passed as a dependency for typewriting.
         wp_enqueue_script( 'gsap-js4', get_template_directory_uri() . '/js/typewriting.js', ['gsap-js', 'gsap-tp'], false, true );
         // Your animation code file - with gsap.js passed as a dependency for home page exclusive.
         wp_enqueue_script('gsap-js3', get_template_directory_uri()."/js/home.js",['gsap-js', 'gsap-st', 'gsap-sto'], false, true);
+        // Animation code file - with gsap.js
+        wp_enqueue_script('gsap-js5', get_template_directory_uri()."/js/course-list.js", ['gsap-js'], false, true);
     }
 
     add_action( 'wp_enqueue_scripts', 'theme_gsap_script' );
@@ -182,7 +185,8 @@
                 ?>
                     <div class="na-home-course-item">
                         <a href="<?php the_permalink(); ?>">
-                            <img src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
+                            <img src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="na-home-course-item-image">
+                            <p class="na-course-item-excerpt"><?php echo get_the_excerpt();?></p>
                             <h2><?php the_title();?></h2>
                         </a>
                     </div>

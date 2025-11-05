@@ -21,4 +21,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
     },
     false
   );
+  const splitTextAnimation = SplitText.create(".na-split-text", {
+    type: "words, chars",
+  });
+
+  gsap.from(splitTextAnimation.chars, {
+    duration: 1,
+    y: 20,
+    autoAlpha: 0,
+    stagger: 0.02,
+  });
 });
