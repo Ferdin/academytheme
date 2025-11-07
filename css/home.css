@@ -30,6 +30,10 @@
   height: 80vh;
 }
 
+.norbert-academy-regular-section {
+  height: 90vh;
+}
+
 /* Optional: remove default top margins inside text column */
 .wp-container-core-columns-is-layout-9d6595d7 .wp-block-column h2 {
   margin-top: 0;
@@ -155,13 +159,13 @@
 
 .typewriter-container {
   position: relative;
-  width: 100%;
+  width: 30vw;
   height: 40vh;
   font-family: monospace;
   background: #1e1e1e;
   padding: 20px;
   border-radius: 5px;
-  margin: 20px 0;
+  margin: 3rem auto;
   box-shadow: rgba(99, 99, 99, 0.7) 0px 2px 8px 0px;
 }
 
@@ -247,7 +251,7 @@
 .na-course-list-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 2rem;
+  grid-gap: 1rem;
   margin-top: 3rem;
 }
 
@@ -288,7 +292,46 @@
 }
 
 .na-home-course-item img {
+  width: 100%;
   border-radius: 1rem;
+}
+
+.na-checker-background {
+  position: relative;
+  cursor: none;
+}
+
+.hover-circle {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.3) 0%,
+    rgba(59, 130, 246, 0.15) 50%,
+    transparent 70%
+  );
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  mix-blend-mode: multiply;
+  left: 0;
+  top: 0;
+}
+
+.cursor-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: rgb(59, 130, 246);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  left: 0;
+  top: 0;
 }
 
 /* Responsive: switch to 2 or 1 columns on smaller screens */

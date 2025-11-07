@@ -1,0 +1,8 @@
+.has-purple-blue-gradient-background {
+  background: linear-gradient(
+    106deg,
+    rgba(121, 67, 232, 1) 0%,
+    rgba(74, 75, 235, 1) 53%,
+    rgba(65, 120, 240, 1) 100%
+  );
+}

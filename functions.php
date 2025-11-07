@@ -17,6 +17,7 @@
     add_action( 'after_setup_theme', 'norbert_academy_theme_setup');
     function norbert_academy_theme_enqueue_styles() {        
         // Custom fonts
+        wp_enqueue_style( 'norbert_academy_theme_editor_css', get_template_directory_uri() . '/editor-style.css', array(), '2.0' );
         wp_enqueue_style( 'norbert_academy_theme_home_css', get_template_directory_uri() . '/css/home.css', array(), '2.0' );
         wp_enqueue_style( 'norbert_academy_theme_font_css', get_template_directory_uri() . '/fonts/fonts.css', array(), '2.0' );
     }
@@ -200,6 +201,107 @@
     }
 
     add_shortcode('post_grid_courses', 'norbert_academy_post_grid_courses_shortcode');
+
+    function norbert_academy_contact_form_shortcode($atts) {
+        ob_start();
+        ?>
+        <form id="na-contact-form" class="na-contact-form">
+            <?php wp_nonce_field('na_contact_form_action', 'na_contact_form_nonce');?>
+            <p>
+                <label for="na_name">Name:</label><br/>
+                <input type="text" id="na_name" name="na_name" required>
+            </p>
+            <p>
+                <label for="na_email">Email:</label><br/>
+                <input type="email" id="na_email" name="na_email" required>
+            </p>
+            <p>
+                <label for="na_message">Message:</label><br>
+                <textarea id="na_message" name="na_message" rows="4" required></textarea>
+            </p>
+            <p>
+                <label>
+                    <input type="checkbox" name="na_newsletter" value="yes">
+                    Sign up for our newsletter
+                </label>
+            </p>
+            <p>
+                <button type="submit">Submit</button>
+            </p>
+            <div id="na-form-response" style="margin-top: 10px;"></div>
+        </form>
+        <?php
+        return ob_get_clean(); 
+    }
+
+    add_shortcode('na_contact_form', 'norbert_academy_contact_form_shortcode');
+
+    function na_add_custom_editor_gradients() {
+        add_theme_support('editor-gradient-presets', [
+            [
+                'name'     => __('Norbert Academy Purple Blue Gradient', 'na-academy'),
+                'slug'     => 'purple-blue',
+                'gradient' => 'linear-gradient(106deg, rgba(121, 67, 232, 1) 0%, rgba(74, 75, 235, 1) 53%, rgba(65, 120, 240, 1) 100%)',
+            ],
+        ]);
+    }
+    add_action('after_setup_theme', 'na_add_custom_editor_gradients');
+
+    function na_add_editor_styles() {
+        add_theme_support('editor-styles');
+        
+        // Load your main styles in the editor so it matches the frontend
+        add_editor_style([
+            'fonts/fonts.css',
+            'editor-style.css'     // Editor-specific tweaks (optional)
+        ]);
+    }
+    add_action('after_setup_theme', 'na_add_editor_styles');
+
+    function na_handle_ajax_contact_form() {
+        // Check nonce
+        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'na_contact_form_action')) {
+            wp_send_json_error(['message' => 'Security check failed.']);
+        }
+
+        // Sanitize inputs
+        $name = sanitize_text_field($_POST['name']);
+        $email = sanitize_email($_POST['email']);
+        $message = sanitize_textarea_field($_POST['message']);
+        $newsletter = isset($_POST['newsletter']) ? 'Yes' : 'No';
+
+        // Example: Send email
+        $to = get_option('admin_email');
+        $subject = 'New AJAX Contact Form Submission';
+        $body = "Name: $name\nEmail: $email\nMessage:\n$message\nNewsletter Signup: $newsletter";
+        $headers = ['Content-Type: text/plain; charset=UTF-8'];
+
+        $mail_sent = wp_mail($to, $subject, $body, $headers);
+
+        if ($mail_sent) {
+            wp_send_json_success(['message' => 'Thank you! Your message has been sent successfully.']);
+        } else {
+            wp_send_json_error(['message' => 'An error occurred while sending your message. Please try again.']);
+        }
+    }
+    add_action('wp_ajax_na_contact_form', 'na_handle_ajax_contact_form');
+    add_action('wp_ajax_nopriv_na_contact_form', 'na_handle_ajax_contact_form');
+
+    function na_enqueue_contact_form_script() {
+        wp_enqueue_script(
+            'na-contact-form-js',
+            get_template_directory_uri() . '/js/na-contact-form.js',
+            [],
+            null,
+            true
+        );
+
+        wp_localize_script('na-contact-form-js', 'naForm', [
+            'ajax_url' => admin_url('admin-ajax.php'),
+        ]);
+    }
+    add_action('wp_enqueue_scripts', 'na_enqueue_contact_form_script');
+
 
     function norbert_academy_post_grid_shortcode($atts) {
         $atts = shortcode_atts(

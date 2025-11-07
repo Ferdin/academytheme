@@ -1,0 +1,39 @@
+/* Custom gradient for Gutenberg editor preview */
+
+.has-purple-blue-gradient-background {
+  background: linear-gradient(
+    106deg,
+    rgba(121, 67, 232, 1) 0%,
+    rgba(74, 75, 235, 1) 53%,
+    rgba(65, 120, 240, 1) 100%
+  );
+}
+.has-gradient-sunset-background {
+  background: linear-gradient(45deg, #ff6b6b, #f8e473);
+}
+.has-gradient-ocean-background {
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+}
+.has-gradient-warm-background {
+  background: linear-gradient(135deg, #f7971e, #ffd200);
+}
+
+h1,
+h2,
+h2,
+h3,
+h4,
+p {
+  font-family: "Geist";
+}
+
+.na-checker-background {
+  background-color: white;
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.02) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
