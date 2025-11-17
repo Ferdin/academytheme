@@ -8,6 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const formData = new FormData(form);
     formData.append("action", "na_contact_form");
+    formData.append("nonce", naForm.nonce);
+
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
 
     try {
       const response = await fetch(naForm.ajax_url, {

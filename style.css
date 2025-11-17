@@ -96,7 +96,7 @@ p {
   font-family: "Geist";
 }
 
-@media (min-width: 1390px) {
+@media (min-width: 1390px) and (max-width: 1659px) {
   .header-container {
     padding: 1rem 18rem;
   }
@@ -106,5 +106,18 @@ p {
 
   .site-footer {
     padding: 1rem 18rem;
+  }
+}
+
+@media (min-width: 1660px) {
+  .header-container {
+    padding: 1rem 22rem !important;
+  }
+  .wp-block-columns {
+    padding: 2rem 22rem !important;
+  }
+
+  .site-footer {
+    padding: 1rem 22rem !important;
   }
 }

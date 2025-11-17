@@ -31,7 +31,7 @@
 }
 
 .norbert-academy-regular-section {
-  height: 90vh;
+  height: 103vh;
 }
 
 /* Optional: remove default top margins inside text column */
@@ -252,7 +252,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1rem;
-  margin-top: 3rem;
+  padding-top: 9vh;
 }
 
 .na-course-list-container a {
@@ -277,8 +277,6 @@
 }
 
 .na-course-item-excerpt {
-  position: absolute;
-  top: 15rem;
   text-align: center;
   padding: 0.2rem;
   background: yellow;
@@ -298,7 +296,12 @@
 
 .na-checker-background {
   position: relative;
+  height: 90vh;
   cursor: none;
+}
+
+.na-zero-padding-column {
+  padding: 0;
 }
 
 .hover-circle {
@@ -318,6 +321,14 @@
   mix-blend-mode: multiply;
   left: 0;
   top: 0;
+}
+
+.na-split-text {
+  font-size: 3rem;
+}
+
+.na-align-center {
+  align-items: center !important;
 }
 
 .cursor-dot {
@@ -349,4 +360,74 @@
   .na-article-container {
     flex-direction: column;
   }
+}
+
+.na-contact-us-container {
+  padding-top: 9vh;
+}
+
+#na-contact-form {
+  background: rgba(255, 255, 255, 1);
+  padding: 1rem 3rem;
+  border-radius: 1rem;
+}
+
+#na-contact-form input[type="text"],
+#na-contact-form input[type="email"],
+#na-contact-form textarea {
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: 98%;
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid silver;
+  border-radius: 5px;
+  margin-top: 0.5rem;
+}
+
+#na-contact-form label {
+  font-family: "Geist";
+  font-weight: 400;
+  color: black;
+}
+
+#na-contact-form input[type="text"],
+#na-contact-form input[type="email"] {
+  height: 2rem;
+}
+
+#na-contact-form textarea {
+  height: 8rem;
+  resize: none;
+}
+
+#na-contact-form button {
+  width: 100%;
+  padding: 1rem;
+  background: #ff0054;
+  border: none;
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+#na-contact-form input[type="checkbox"] {
+  accent-color: #ff0054;
+}
+
+.icon-heading-block i {
+  color: #fff;
+  text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff;
+  animation: glowPulse 1.5s infinite alternate;
+}
+
+@keyframes glowPulse {
+  from {
+    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff;
+  }
+  to {
+    text-shadow: 0 0 10px #ff0054, 0 0 20px #0ff, 0 0 40px #ff0054;
+  }
+}
+
+@media (min-width: 1660px) {
 }

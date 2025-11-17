@@ -226,7 +226,7 @@
                 </label>
             </p>
             <p>
-                <button type="submit">Submit</button>
+                <button type="submit">Send your message</button>
             </p>
             <div id="na-form-response" style="margin-top: 10px;"></div>
         </form>
@@ -260,15 +260,15 @@
 
     function na_handle_ajax_contact_form() {
         // Check nonce
-        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'na_contact_form_action')) {
+        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['na_contact_form_nonce'], 'na_contact_form_action')) {
             wp_send_json_error(['message' => 'Security check failed.']);
         }
 
         // Sanitize inputs
-        $name = sanitize_text_field($_POST['name']);
-        $email = sanitize_email($_POST['email']);
-        $message = sanitize_textarea_field($_POST['message']);
-        $newsletter = isset($_POST['newsletter']) ? 'Yes' : 'No';
+        $name = sanitize_text_field($_POST['na_name']);
+        $email = sanitize_email($_POST['na_email']);
+        $message = sanitize_textarea_field($_POST['na_message']);
+        $newsletter = isset($_POST['na_newsletter']) ? 'Yes' : 'No';
 
         // Example: Send email
         $to = get_option('admin_email');
@@ -298,6 +298,7 @@
 
         wp_localize_script('na-contact-form-js', 'naForm', [
             'ajax_url' => admin_url('admin-ajax.php'),
+            'nonce'    => wp_create_nonce('na_contact_form_action'),
         ]);
     }
     add_action('wp_enqueue_scripts', 'na_enqueue_contact_form_script');
