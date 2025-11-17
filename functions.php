@@ -303,6 +303,31 @@
     }
     add_action('wp_enqueue_scripts', 'na_enqueue_contact_form_script');
 
+    function norbert_academy_course_learn_section_shortcode($atts){
+        $atts = shortcode_atts([
+            'list' => ''
+        ], $atts, 'course_learn_section');
+
+        // Convert the comma-separated list into an array
+        $items = array_map('trim', explode(',', $atts['list']));
+
+        // Start output buffer
+        ob_start();
+
+        echo '<div class="course-grid">';
+
+        foreach ($items as $item) {
+            if (!empty($item)) {
+                echo '<div class="course-card">' . esc_html($item) . '</div>';
+            }
+        }
+
+        echo '</div>';
+
+        return ob_get_clean();
+    }
+    
+    add_shortcode('course_learn_section', 'norbert_academy_course_learn_section_shortcode');
 
     function norbert_academy_post_grid_shortcode($atts) {
         $atts = shortcode_atts(
