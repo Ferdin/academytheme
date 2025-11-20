@@ -303,31 +303,40 @@
     }
     add_action('wp_enqueue_scripts', 'na_enqueue_contact_form_script');
 
-    function norbert_academy_course_learn_section_shortcode($atts){
+    function norbert_academy_course_card_shortcode($atts) {
         $atts = shortcode_atts([
-            'list' => ''
-        ], $atts, 'course_learn_section');
+            'heading'      => '',
+            'snippet'      => '',
+            'link_address' => '',
+        ], $atts, 'course_card');
 
-        // Convert the comma-separated list into an array
-        $items = array_map('trim', explode(',', $atts['list']));
-
-        // Start output buffer
-        ob_start();
-
-        echo '<div class="course-grid">';
-
-        foreach ($items as $item) {
-            if (!empty($item)) {
-                echo '<div class="course-card">' . esc_html($item) . '</div>';
-            }
+        // Must have at least a heading
+        if (empty($atts['heading'])) {
+            return '';
         }
 
-        echo '</div>';
+        // Escape values
+        $heading = esc_html($atts['heading']);
+        $snippet = !empty($atts['snippet']) ? '<p>' . esc_html($atts['snippet']) . '</p>' : '';
+        $button  = '';
 
-        return ob_get_clean();
+        // Optional link button
+        if (!empty($atts['link_address'])) {
+            $url = esc_url($atts['link_address']);
+            $button = '<a href="' . $url . '" class="course-card-btn">Learn more</a>';
+        }
+
+        // Final card HTML
+        return '
+            <div class="course-card">
+                <h3>' . $heading . '</h3>
+                ' . $snippet . '
+                ' . $button . '
+            </div>
+        ';
     }
-    
-    add_shortcode('course_learn_section', 'norbert_academy_course_learn_section_shortcode');
+    add_shortcode('course_card', 'norbert_academy_course_card_shortcode');
+
 
     function norbert_academy_post_grid_shortcode($atts) {
         $atts = shortcode_atts(

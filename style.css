@@ -64,10 +64,6 @@ body {
   margin-bottom: 0px !important;
 }
 
-.wp-block-columns {
-  padding: 2rem 4rem;
-}
-
 .site-footer {
   padding: 1rem 4rem;
 }
@@ -100,7 +96,9 @@ p {
   .header-container {
     padding: 1rem 18rem;
   }
-  .wp-block-columns {
+  .norbert-academy-regular-section,
+  .na-checker-background,
+  .home-article-section {
     padding: 2rem 18rem;
   }
 
@@ -111,13 +109,15 @@ p {
 
 @media (min-width: 1660px) {
   .header-container {
-    padding: 1rem 22rem !important;
+    padding: 1rem 30rem !important;
   }
-  .wp-block-columns {
-    padding: 2rem 22rem !important;
+  .norbert-academy-regular-section,
+  .na-checker-background,
+  .home-article-section {
+    padding: 2rem 30rem !important;
   }
 
   .site-footer {
-    padding: 1rem 22rem !important;
+    padding: 1rem 30rem !important;
   }
 }

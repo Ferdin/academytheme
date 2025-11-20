@@ -362,7 +362,7 @@
   }
 }
 
-.na-contact-us-container {
+.na-regular-container {
   padding-top: 9vh;
 }
 
@@ -432,17 +432,31 @@
 @media (min-width: 1660px) {
 }
 
-.course-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+.course-card {
+  font-family: "Geist";
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(9.9px);
+  -webkit-backdrop-filter: blur(9.9px);
+  border: 1px solid rgba(255, 255, 255, 0.49);
+  color: white;
 }
 
-.course-card {
-  padding: 1rem;
-  background: #f9f9f9;
-  border-radius: 8px;
-  font-size: 1rem;
+.course-card h3 {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.course-card-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: #0a74da;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
 }
 
 /* Tablet */
