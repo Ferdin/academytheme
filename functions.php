@@ -150,6 +150,8 @@
         wp_enqueue_script('gsap-js3', get_template_directory_uri()."/js/home.js",['gsap-js', 'gsap-st', 'gsap-sto'], false, true);
         // Animation code file - with gsap.js
         wp_enqueue_script('gsap-js5', get_template_directory_uri()."/js/course-list.js", ['gsap-js'], false, true);
+        // Animation code file - with gsap.js
+        wp_enqueue_script('gsap-js6', get_template_directory_uri()."/js/learning-path.js", ['gsap-js'], false, true);
     }
 
     add_action( 'wp_enqueue_scripts', 'theme_gsap_script' );
@@ -337,6 +339,57 @@
     }
     add_shortcode('course_card', 'norbert_academy_course_card_shortcode');
 
+    function norbert_academy_learning_path($atts) {
+        $atts = shortcode_atts([
+            "title" => "",
+            "list" => "",
+            "percentage" => 100, // final progress value
+            "radius" => 75,      // optional: make the circle bigger
+            "stroke" => 10,      // stroke width
+        ], $atts);
+
+        // Parse list="key/value 1, key/value 2"
+        $pairs = array_map('trim', explode(",", $atts['list']));
+        $items = [];
+
+        foreach ($pairs as $pair) {
+            [$key, $val] = array_map('trim', explode("/", $pair));
+            $items[] = ["key" => $key, "value" => $val];
+        }
+
+        $r = (int) $atts['radius'];
+        $stroke = (int) $atts['stroke'];
+        $svgSize = $r * 2 + $stroke; // width/height
+
+        ob_start();
+        ?>
+        <div class="learning-path-wrapper" data-items='<?php echo json_encode($items); ?>'>
+            <div class="progress-container" style="--circle-size: 180px; --circle-circumference: 408;">
+                <svg class="progress-ring" width="<?php echo $svgSize; ?>" height="<?php echo $svgSize; ?>">
+                    <circle class="progress-ring__background" cx="<?php echo $r + $stroke/2; ?>" cy="<?php echo $r + $stroke/2; ?>" r="<?php echo $r; ?>" stroke-width="<?php echo $stroke; ?>"/>
+                    <circle class="progress-ring__circle" cx="<?php echo $r + $stroke/2; ?>" cy="<?php echo $r + $stroke/2; ?>" r="<?php echo $r; ?>" stroke-width="<?php echo $stroke; ?>"/>
+                </svg>
+                <div class="progress-text">0%</div>
+            </div>
+            <div class="learning-path-course-title">
+                <h2><?php echo $atts['title'];?></h2>
+            </div>
+            <div class="lp-controls">
+                <button class="lp-play"><i class="bi bi-play-circle"></i></button>
+                <button class="lp-pause"><i class="bi bi-pause-circle"></i></button>
+                <button class="lp-back"><i class="bi bi-skip-backward-circle"></i></button>
+                <button class="lp-restart"><i class="bi bi-arrow-counterclockwise"></i></button>
+            </div>
+            <div class="content-container">
+                <h2 class="lp-heading"></h2>
+                <p class="lp-description"></p>
+            </div>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
+
+    add_shortcode('learning_path_card', 'norbert_academy_learning_path');
 
     function norbert_academy_post_grid_shortcode($atts) {
         $atts = shortcode_atts(

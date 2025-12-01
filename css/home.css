@@ -472,3 +472,93 @@
     grid-template-columns: repeat(1, 1fr);
   }
 }
+.learning-path-wrapper-container {
+  padding-top: 9vh;
+}
+
+.learning-path-wrapper {
+  padding: 20px;
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.47);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(11.9px);
+  -webkit-backdrop-filter: blur(11.9px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.progress-container {
+  margin: 0 auto;
+  position: relative;
+  width: var(--circle-size, 150px); /* dynamic width */
+  height: var(--circle-size, 150px); /* dynamic height */
+}
+
+.progress-ring__background {
+  fill: transparent;
+  stroke: #e5e5e5;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.progress-ring__circle {
+  fill: transparent;
+  stroke: #007bff;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  stroke-dasharray: var(--circle-circumference, 408);
+  stroke-dashoffset: var(--circle-circumference, 408);
+  transition: stroke-dashoffset 0.2s linear;
+}
+
+.progress-text {
+  position: absolute;
+  top: 46%;
+  left: 47%;
+  transform: translate(-50%, -50%);
+  font-family: "Geist";
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.content-container {
+  max-width: 350px;
+}
+
+.lp-heading {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.lp-description {
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+.lp-controls button {
+  padding: 10px;
+  background: black;
+  border: none;
+  color: white;
+}
+
+.lp-controls button i {
+  font-size: 22px;
+}
+
+.content-container {
+  padding-top: 2rem;
+}
+
+.learning-path-course-title {
+  display: flex;
+  justify-content: center;
+}
+
+.lp-controls {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
