@@ -152,6 +152,8 @@
         wp_enqueue_script('gsap-js5', get_template_directory_uri()."/js/course-list.js", ['gsap-js'], false, true);
         // Animation code file - with gsap.js
         wp_enqueue_script('gsap-js6', get_template_directory_uri()."/js/learning-path.js", ['gsap-js'], false, true);
+        // Animation code file - with gsap.js
+        wp_enqueue_script('gsap-js7', get_template_directory_uri()."/js/faq.js", ['gsap-js'], false, true);
     }
 
     add_action( 'wp_enqueue_scripts', 'theme_gsap_script' );
@@ -391,6 +393,22 @@
 
     add_shortcode('learning_path_card', 'norbert_academy_learning_path');
 
+    function norbert_academy_frequently_asked_questions($atts) {
+        $atts = shortcode_atts([
+            "question" => "",
+            "answer" => ""
+        ], $atts);
+         ob_start();
+        ?>
+            <div class="faq-item">
+                <div class="faq-question"><?php echo $atts['question'];?></div>
+                <div class="faq-answer"><?php echo $atts['answer'];?></div>
+            </div>
+        <?php
+        return ob_get_clean();
+    }
+
+    add_shortcode('norbert_academy_faq', 'norbert_academy_frequently_asked_questions');
     function norbert_academy_post_grid_shortcode($atts) {
         $atts = shortcode_atts(
             [
